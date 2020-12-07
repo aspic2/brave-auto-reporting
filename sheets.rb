@@ -38,6 +38,8 @@ if __FILE__ == $0
   google_creds = GoogleCredentials.new()
   api = SheetsApi.new(service, google_creds.reports_list_sheet_id, google_creds.reports_list_range)
   campaign_data = api.read_sheet_values()
+
+  # This is not technically necessary to test this class / module
   campaigns_list = Array.new()
   campaign_data.each { |d|
     campaigns_list.push(Campaign.new(d))
