@@ -21,6 +21,7 @@ class BraveReportsApi
     @campaign_id = campaign_id
     @url = nil
     @report = nil
+    @report_as_array = Array.new()
   end
 
   attr_accessor :url, :report
