@@ -1,34 +1,38 @@
 require './credentials.rb'
 require './campaigns.rb'
+require './csv_writer.rb'
+require './test_data.rb'
 
 require 'uri'
 require 'open-uri'
 
-brave_credentials = BraveCredentials.new()
-campaign = Campaign.new()
+
 
 
 class BraveReportsApi
 
-  def initialize(credentials)
-    @credentials = credentials
+  def initialize(campaign_id, creds)
+    @credentials = creds
     @headers = {
-        "authorization": "Bearer #{credentials.access_token}",
+        "authorization": "Bearer #{creds.access_token}",
         # "content-type" as a string
         'contenttype': 'application/json',
     }
+    @campaign_id = campaign_id
     @url = nil
     @report = nil
+    @report_as_array = Array.new()
   end
 
   attr_accessor :url, :report
 
-  def build_url(campaign_id)
-    @url = URI.join("https://ads-serve.brave.com/v1/report/campaign/csv/", campaign_id)
+  def build_url()
+    @url = URI.join(@credentials.report_url, @campaign_id)
     return self
   end
 
   def retrieve_report()
+    build_url()
     @report = URI.open(@url, "authorization" => @headers.fetch(:authorization), "content-type" => @headers.fetch(:contenttype))
   end
 
@@ -42,6 +46,10 @@ end
 
 
 if __FILE__ == $0
-  api = BraveReportsApi.new(brave_credentials).build_url(campaign.campaign_id)
+  brave_credentials = BraveCredentials.new()
+  test_data = TestData.new()
+  campaign = Campaign.new(test_data.campaign_hash)
+  api = BraveReportsApi.new(campaign.campaign_id, brave_credentials)
   api.retrieve_report()
+  CSVWriter.new("test_report", api.report).write()
 end
