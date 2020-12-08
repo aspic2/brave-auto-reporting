@@ -5,13 +5,13 @@ require "fileutils"
 
 module Quickstart
   OOB_URI = "urn:ietf:wg:oauth:2.0:oob".freeze
-  APPLICATION_NAME = "Google Sheets API Ruby Quickstart".freeze
+  APPLICATION_NAME = "BSA Brave Reports Auto Update".freeze
   CREDENTIALS_PATH = "credentials.json".freeze
   # The file token.yaml stores the user's access and refresh tokens, and is
   # created automatically when the authorization flow completes for the first
   # time.
   TOKEN_PATH = "token.yaml".freeze
-  SCOPE = Google::Apis::SheetsV4::AUTH_SPREADSHEETS_READONLY
+  SCOPE = Google::Apis::SheetsV4::AUTH_SPREADSHEETS
 
   ##
   # Ensure valid credentials, either by restoring from the saved credentials
@@ -61,13 +61,13 @@ if __FILE__ == $0
   service = GoogleService.new().service
   # Prints the names and majors of students in a sample spreadsheet:
   # https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-  spreadsheet_id = "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms"
-  range = "Class Data!A2:E"
+  spreadsheet_id = "12ul3byR_PniHoeB1Uq_rkqfJB34c6LLTbmSf9laj88E"
+  range = "Reports List!A2:D"
   response = service.get_spreadsheet_values spreadsheet_id, range
-  puts "Name, Major:"
+  puts "First Column, Last Column:"
   puts "No data found." if response.values.empty?
   response.values.each do |row|
     # Print columns A and E, which correspond to indices 0 and 4.
-    puts "#{row[0]}, #{row[4]}"
+    puts "#{row[0]}, #{row[3]}"
   end
 end
