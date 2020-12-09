@@ -7,7 +7,7 @@ class BraveCredentials
     # To generate an access token:
     @username = "your_username"
     @password = "your_password"
-    @report_url = "your_base_url_for_reports"
+    @report_url = "insert_url_for_brave_reporting"
   end
 
   attr_reader :access_token, :report_url
@@ -15,9 +15,9 @@ end
 
 class GoogleCredentials
   def initialize()
-    @reports_list_sheet_id = "your_google_sheet_id_for_your_list_of_reports"
-    @reports_list_range = "Reports List!A2:D"
+    @reports_list_sheet_id = "sheets_id_for_your_list_of_campaigns"
+    @reports_list_range = "Insert_Your_Tab_Name_and_Range!A1:Z"
   end
 
-  attr_reader :reports_list_sheet_id, :reports_list_range, :write_to_range_without_tab_name
+  attr_reader :reports_list_sheet_id, :reports_list_range
 end
