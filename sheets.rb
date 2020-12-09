@@ -87,6 +87,7 @@ if __FILE__ == $0
   puts "encoding after = #{brave_report_text.encoding}"
   puts write_api.write_sheet_values(brave_report_text)
 
-  write_api.clear_values_and_write_new_ones(brave_report_text)
+  # Test both methods at once
+  #write_api.clear_values_and_write_new_ones(brave_report_text)
 
 end
