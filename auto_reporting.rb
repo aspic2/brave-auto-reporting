@@ -38,6 +38,10 @@ class AutoReporting
       report_text.force_encoding('UTF-8')
       puts "Report Encoding = #{report_text.encoding}"
 
+      # should fix Google Sheets API RateLimitError. Can likely shorten this if
+      # necessary
+      sleep(15)
+
       #3 Update Campaign's reporting spreadsheet
       write_api = SheetsApi.new(@google_service, campaign.sheets_id, campaign.get_write_range())
       write_api.clear_values_and_write_new_ones(report_text)
