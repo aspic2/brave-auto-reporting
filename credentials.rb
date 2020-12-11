@@ -1,13 +1,15 @@
-# Fill in these values with your info and save a local copy
+require './resources/confidential.rb'
+
 class BraveCredentials
 
   def initialize()
-    @access_token = "Your_access_token"
+    credentials_hash = Confidential::BRAVE_HASH
+    @access_token = credentials_hash[:access_token]
 
     # To generate an access token:
-    @username = "your_username"
-    @password = "your_password"
-    @report_url = "insert_url_for_brave_reporting"
+    @username = credentials_hash[:username]
+    @password = credentials_hash[:password]
+    @report_url = credentials_hash[:url]
   end
 
   attr_reader :access_token, :report_url
@@ -15,8 +17,9 @@ end
 
 class GoogleCredentials
   def initialize()
-    @reports_list_sheet_id = "sheets_id_for_your_list_of_campaigns"
-    @reports_list_range = "Insert_Your_Tab_Name_and_Range!A1:Z"
+    credentials_hash = Confidential::GOOGLE_HASH
+    @reports_list_sheet_id = credentials_hash[:sheet_id]
+    @reports_list_range = credentials_hash[:sheet_range]
   end
 
   attr_reader :reports_list_sheet_id, :reports_list_range
