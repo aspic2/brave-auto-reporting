@@ -9,8 +9,8 @@ class CSVWriter
   def write()
     target = open(@filepath, 'w')
     @data.each_line { |line|
-    target.write(line)
-    }
+      target.write(line)
+      }
     target.close()
   end
 end
