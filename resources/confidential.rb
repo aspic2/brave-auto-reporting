@@ -2,28 +2,28 @@
 # campaign IDs that should not be shared in the remote repository.
 
 module Confidential
-  brave_access_token = ""
-  brave_username = ""
-  brave_password = ""
-  brave_api_url = ""
+  BRAVE_ACCESS_TOKEN = ""
+  BRAVE_USERNAME = ""
+  BRAVE_PASSWORD = ""
+  BRAVE_API_URL = ""
 
-  google_reports_list_id = ""
-  google_reports_list_range = ""
+  GOOGLE_REPORTS_LIST_ID = ""
+  GOOGLE_REPORTS_LIST_RANGE = ""
 
-  test_campaign_hash = {"campaign_name": "",
+  TEST_CAMPAIGN_HASH = {"campaign_name": "",
     "campaign_id": "",
     "sheets_url": "",
     "tab_name": ""
   }
 
-  brave_hash = {"access_token": Confidential.brave_access_token,
-                "username": Confidential.brave_username,
-                "password": Confidential.brave_password,
-                "url": Confidential.brave_api_url
+  BRAVE_HASH = {"access_token": Confidential::BRAVE_ACCESS_TOKEN,
+                "username": Confidential::BRAVE_USERNAME,
+                "password": Confidential::BRAVE_PASSWORD,
+                "url": Confidential::BRAVE_API_URL
                 }
 
-  google_confidential_hash = {"reports_list_sheet_id": Confidential.google_reports_list_id,
-  "reports_list_range": Confidential.google_reports_list_range
+  GOOGLE_HASH = {"sheet_id": Confidential::GOOGLE_REPORTS_LIST_ID,
+  "sheet_range": Confidential::GOOGLE_REPORTS_LIST_RANGE
   }
-  
+
 end
