@@ -26,8 +26,10 @@ class AutoReporting
 
   def get_report(campaign)
     brave_api = BraveReportsApi.new(campaign.campaign_id, @brave_credentials)
+    # TODO: move this file processing to the Brave or Helper module
     report_file = brave_api.retrieve_report()
     report_text = report_file.read
+    # TODO: move to helper class
     # fixes issue with Coinspot campaign
     # ERROR = multi_json-1.15.0/lib/multi_json/adapters/json_common.rb:19:in `encode': "\xE2" from ASCII-8BIT to UTF-8 (Encoding::UndefinedConversionError)
     utf_8_report_text = report_text.force_encoding('UTF-8')
