@@ -9,7 +9,6 @@ require "google/apis/sheets_v4"
 
 
 class SheetsApi
-  # TODO: make this class read from the spreadsheet of live Brave campaigns and store the data in memory
 
   def initialize(service, spreadsheet_id, range=nil)
     @service = service

@@ -14,6 +14,9 @@ class Campaign
   attr_accessor :sheets_id
 
   def get_sheets_id()
+    # TODO: 1. Check that you weren't actually provided just the ID.
+    # TODO: 2. maybe move the regex logic to a helper module.
+    # TODO: It would also be helpful for Brave IDs.
     spreadsheets_regex = /\/spreadsheets\/d\/([a-zA-Z0-9\-_]+)/
     id_plus_leader = spreadsheets_regex.match(@sheets_url)
     # Spreadsheet ID is stored in match object at hash 1
