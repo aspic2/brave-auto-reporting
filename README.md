@@ -16,7 +16,7 @@ You can run this program from bash with run-auto-reporting.
 
 Or you can run it directly from auto_reporting.rb  
 
-###Before You Begin  
+### Before You Begin  
 
   1. Update resources/confidential.rb to use your credentials and test data
   2. Activate the Google Spreadsheets API and place credentials.json in the base directory of the project.
