@@ -21,6 +21,7 @@ class AutoReporting
     campaign_data.each { |d|
       @campaigns.push(Campaign.new(d))
     }
+    puts "There are #{@campaigns.length} campaigns in the list today."
   end
 
   def get_report(campaign)
@@ -39,10 +40,15 @@ class AutoReporting
   def run()
     build_campaigns()
     @campaigns.each {|campaign|
-      report_text = get_report(campaign)
-      # Fixes Google Sheets API RateLimitError. Can shorten this timespan if necessary
-      sleep(15)
-      update_spreadsheet(campaign, report_text)
+      begin
+        report_text = get_report(campaign)
+        # Fixes Google Sheets API RateLimitError. Can shorten this timespan if necessary
+        sleep(15)
+        update_spreadsheet(campaign, report_text)
+      rescue
+        puts "Something went wrong updating data for #{campaign.campaign_name}. Skipping...\n\n"
+        next
+      end
     }
     puts "Finished"
   end

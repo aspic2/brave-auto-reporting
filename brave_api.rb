@@ -43,7 +43,7 @@ class BraveReportsApi
     # ERROR = multi_json-1.15.0/lib/multi_json/adapters/json_common.rb:19:in `encode': "\xE2" from ASCII-8BIT to UTF-8 (Encoding::UndefinedConversionError)
     utf_8_report_text = report_text.force_encoding('UTF-8')
     return utf_8_report_text
-  end 
+  end
 
   def print_report()
     @report.each_line {|line|
