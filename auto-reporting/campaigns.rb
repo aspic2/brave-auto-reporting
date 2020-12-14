@@ -1,4 +1,4 @@
-require './test_data.rb'
+require './auto-reporting/test_data.rb'
 
 class Campaign
 

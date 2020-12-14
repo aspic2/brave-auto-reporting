@@ -1,7 +1,7 @@
-require './credentials.rb'
-require './campaigns.rb'
-require './csv_writer.rb'
-require './test_data.rb'
+require './auto-reporting/credentials.rb'
+require './auto-reporting/campaigns.rb'
+require './auto-reporting/csv_writer.rb'
+require './auto-reporting/test_data.rb'
 
 require 'uri'
 require 'open-uri'

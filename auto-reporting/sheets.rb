@@ -1,8 +1,8 @@
-require './brave_api.rb'
-require './quickstart.rb'
-require './credentials.rb'
-require './campaigns'
-require './test_data'
+require './auto-reporting/brave_api.rb'
+require './auto-reporting/quickstart.rb'
+require './auto-reporting/credentials.rb'
+require './auto-reporting/campaigns'
+require './auto-reporting/test_data'
 
 require 'csv'
 require "google/apis/sheets_v4"
