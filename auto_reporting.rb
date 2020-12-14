@@ -1,9 +1,9 @@
-require './brave_api.rb'
-require './credentials.rb'
-require './csv_writer.rb'
-require './quickstart.rb'
-require './sheets.rb'
-require './test_data.rb'
+require './auto-reporting/brave_api.rb'
+require './auto-reporting/credentials.rb'
+require './auto-reporting/csv_writer.rb'
+require './auto-reporting/quickstart.rb'
+require './auto-reporting/sheets.rb'
+require './auto-reporting/test_data.rb'
 
 class AutoReporting
 
