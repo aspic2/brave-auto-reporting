@@ -48,11 +48,11 @@ class AutoReporting
         sleep(15)
         update_spreadsheet(campaign, report_text)
       rescue
-        puts "Something went wrong updating data for #{campaign.campaign_name}. Skipping...\n\n"
+        puts "\n\nSomething went wrong updating data for #{campaign.campaign_name}. Skipping...\n\n"
         next
       end
     }
-    puts "Finished"
+    puts "\n\nFinished"
   end
 
 
