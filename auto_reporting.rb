@@ -38,8 +38,11 @@ class AutoReporting
 
   def run()
     build_campaigns()
+    count = 0
     @campaigns.each {|campaign|
       begin
+        count += 1
+        print "#{count} "
         report_text = get_report(campaign)
         # Fixes Google Sheets API RateLimitError. Can shorten this timespan if necessary
         sleep(15)
