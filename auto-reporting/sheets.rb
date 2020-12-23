@@ -40,7 +40,6 @@ class SheetsApi
   end
 
   def clear_sheet_values()
-    puts "Clearing Spreadsheet ID = #{@spreadsheet_id}, Range = #{@range}"
     response = @service.clear_values(@spreadsheet_id, @range)
     return response
   end
@@ -48,7 +47,6 @@ class SheetsApi
   def write_sheet_values(data)
     data_as_array = CSV.new(data).read
     value_range = Google::Apis::SheetsV4::ValueRange.new(range: @range, values: data_as_array)
-    puts "Writing to Spreadsheet ID = #{@spreadsheet_id}, Range = #{@range}"
     response = @service.update_spreadsheet_value(@spreadsheet_id, @range, value_range, value_input_option: "USER_ENTERED")
     return response
   end

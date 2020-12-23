@@ -33,7 +33,6 @@ class AutoReporting
   def update_spreadsheet(campaign, report_text)
     write_api = SheetsApi.new(@google_service, campaign.sheets_id, campaign.get_write_range())
     write_api.clear_values_and_write_new_ones(report_text)
-    puts "Updated\n\n\n"
   end
 
 
