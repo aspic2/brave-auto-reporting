@@ -33,24 +33,26 @@ class AutoReporting
   def update_spreadsheet(campaign, report_text)
     write_api = SheetsApi.new(@google_service, campaign.sheets_id, campaign.get_write_range())
     write_api.clear_values_and_write_new_ones(report_text)
-    puts "Updated\n\n\n"
   end
 
 
   def run()
     build_campaigns()
+    count = 0
     @campaigns.each {|campaign|
       begin
+        count += 1
+        print "#{count} "
         report_text = get_report(campaign)
         # Fixes Google Sheets API RateLimitError. Can shorten this timespan if necessary
         sleep(15)
         update_spreadsheet(campaign, report_text)
       rescue
-        puts "Something went wrong updating data for #{campaign.campaign_name}. Skipping...\n\n"
+        puts "\n\nSomething went wrong updating data for #{campaign.campaign_name}. Skipping...\n\n"
         next
       end
     }
-    puts "Finished"
+    puts "\n\nFinished"
   end
 
 
