@@ -26,7 +26,7 @@ class Campaign
 
   def get_write_range()
     # default range to use when writing into a spreadsheet
-    return @tab_name + "!" + "A1:M"
+    return @tab_name + "!" + "A1:N"
   end
 
 end
