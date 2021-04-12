@@ -4,6 +4,7 @@ require './auto-reporting/csv_writer.rb'
 require './auto-reporting/quickstart.rb'
 require './auto-reporting/sheets.rb'
 require './auto-reporting/test_data.rb'
+require './auto-reporting/report_data.rb'
 
 class AutoReporting
 
@@ -26,8 +27,13 @@ class AutoReporting
 
   def get_report(campaign)
     brave_api = BraveReportsApi.new(campaign.campaign_id, @brave_credentials)
-    report = brave_api.get_report_text_as_UTF_8()
+    report = brave_api.set_report()
     return report
+  end
+
+  def process_report(report)
+    report_data = ReportData.new(report)
+    return report_data.process_data()
   end
 
   def update_spreadsheet(campaign, report_text)
@@ -43,9 +49,10 @@ class AutoReporting
       begin
         count += 1
         print "#{count} "
-        report_text = get_report(campaign)
-        # Fixes Google Sheets API RateLimitError. Can shorten this timespan if necessary
-        sleep(15)
+         raw_report = get_report(campaign)
+         report_text = process_report(raw_report)
+        # Fixes Google Sheets API RateLimitError.
+        sleep(10)
         update_spreadsheet(campaign, report_text)
       rescue
         puts "\n\nSomething went wrong updating data for #{campaign.campaign_name}. Skipping...\n\n"

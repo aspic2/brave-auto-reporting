@@ -76,7 +76,9 @@ if __FILE__ == $0
   write_api = SheetsApi.new(service, write_to_campaign.sheets_id, write_to_campaign.get_write_range())
   write_api.clear_sheet_values()
 
-  brave_report_text = BraveReportsApi.new(write_to_campaign.campaign_id, BraveCredentials.new()).get_report_text_as_UTF_8()
+  brave_report = BraveReportsApi.new(write_to_campaign.campaign_id, BraveCredentials.new()).set_report()
+  report_data = ReportData.new(brave_report)
+  brave_report_text = report_data.process_data()
   puts write_api.write_sheet_values(brave_report_text)
 
   # Test both methods at once

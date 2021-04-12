@@ -2,6 +2,7 @@ require './auto-reporting/credentials.rb'
 require './auto-reporting/campaigns.rb'
 require './auto-reporting/csv_writer.rb'
 require './auto-reporting/test_data.rb'
+require './auto-reporting/report_data.rb'
 
 require 'uri'
 require 'open-uri'
@@ -34,13 +35,13 @@ class BraveReportsApi
   def set_report()
     build_url()
     @report = URI.open(@url, "authorization" => @headers.fetch(:authorization), "content-type" => @headers.fetch(:contenttype))
+    return @report
   end
 
   def get_report_text_as_UTF_8()
+    # OBSELETE. USE SIMILAR METHOD IN ReportData CLASS
     set_report()
     report_text = @report.read
-    # fixes issue with Coinspot campaign
-    # ERROR = multi_json-1.15.0/lib/multi_json/adapters/json_common.rb:19:in `encode': "\xE2" from ASCII-8BIT to UTF-8 (Encoding::UndefinedConversionError)
     utf_8_report_text = report_text.force_encoding('UTF-8')
     return utf_8_report_text
   end
@@ -59,6 +60,7 @@ if __FILE__ == $0
   test_data = TestData.new()
   campaign = Campaign.new(test_data.campaign_hash)
   api = BraveReportsApi.new(campaign.campaign_id, brave_credentials)
-  api.set_report()
-  CSVWriter.new("test_report", api.report).write()
+  report = api.set_report()
+  report_data = ReportData.new(report)
+  CSVWriter.new("test_report", report_data.data).write()
 end
