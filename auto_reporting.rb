@@ -52,7 +52,7 @@ class AutoReporting
          raw_report = get_report(campaign)
          report_text = process_report(raw_report)
         # Fixes Google Sheets API RateLimitError.
-        sleep(10)
+        sleep(15)
         update_spreadsheet(campaign, report_text)
       rescue
         puts "\n\nSomething went wrong updating data for #{campaign.campaign_name}. Skipping...\n\n"
