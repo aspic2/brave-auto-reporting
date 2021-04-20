@@ -51,11 +51,16 @@ class AutoReporting
         print "#{count} "
          raw_report = get_report(campaign)
          report_text = process_report(raw_report)
+        update_spreadsheet(campaign, report_text)
         # Fixes Google Sheets API RateLimitError.
         sleep(15)
-        update_spreadsheet(campaign, report_text)
-      rescue
-        puts "\n\nSomething went wrong updating data for #{campaign.campaign_name}. Skipping...\n\n"
+      rescue => e
+        puts "\n\nError #{e.inspect} updating data for #{campaign.campaign_name}."
+        puts "Backtrace:"
+        e.backtrace_locations.each do |location|
+          puts location
+        end
+        puts "\nSkipping...\n\n"
         next
       end
     }
