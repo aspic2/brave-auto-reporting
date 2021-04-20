@@ -54,6 +54,21 @@ class AutoReporting
         update_spreadsheet(campaign, report_text)
         # Fixes Google Sheets API RateLimitError.
         sleep(15)
+
+      rescue OpenURI::HTTPError => oe
+        puts "\n\nOpenURI Error\n#{oe.inspect} updating data for #{campaign.campaign_name}.\n"
+        puts "Check the Brave api key, then the report ID, either of which can cause this error.\n"
+        puts "Backtrace:"
+        oe.backtrace_locations.each do |location|
+          puts location
+        end
+        puts "\nSkipping...\n\n"
+        next
+      rescue Google::Apis::ClientError => ge
+        puts "\n\nGoogle Error updating data for #{campaign.campaign_name}."
+        puts "\n#{ge.inspect}\n"
+        puts "\nSkipping...\n\n"
+        next
       rescue => e
         puts "\n\nError #{e.inspect} updating data for #{campaign.campaign_name}."
         puts "Backtrace:"
@@ -64,6 +79,7 @@ class AutoReporting
         next
       end
     }
+
     puts "\n\nFinished"
   end
 
