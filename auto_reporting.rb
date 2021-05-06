@@ -69,6 +69,12 @@ class AutoReporting
         puts "\n#{ge.inspect}\n"
         puts "\nSkipping...\n\n"
         next
+      rescue TypeError => te
+        puts "\n\nType Error updating data for #{campaign.campaign_name}."
+        puts "\n#{te.inspect}"
+        puts"Report is probably empty.\n"
+        puts "\nSkipping...\n\n"
+        next
       rescue => e
         puts "\n\nError #{e.inspect} updating data for #{campaign.campaign_name}."
         puts "Backtrace:"
