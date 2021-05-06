@@ -42,7 +42,12 @@ class ReportData
     delete_columns(@unwanted_columns)
     csv_string = @csv.to_csv()
     return get_report_text_as_UTF_8(csv_string)
+  end
 
+  def is_this_a_tempfile?()
+    # This checks if the report is empty, as non-empty reports return as Tempfile
+    valid_file = @data.instance_of?(Tempfile)
+    return valid_file
   end
 
 

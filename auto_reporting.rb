@@ -49,8 +49,8 @@ class AutoReporting
       begin
         count += 1
         print "#{count} "
-         raw_report = get_report(campaign)
-         report_text = process_report(raw_report)
+        raw_report = get_report(campaign)
+        report_text = process_report(raw_report)
         update_spreadsheet(campaign, report_text)
         # Fixes Google Sheets API RateLimitError.
         sleep(15)
@@ -67,6 +67,12 @@ class AutoReporting
       rescue Google::Apis::ClientError => ge
         puts "\n\nGoogle Error updating data for #{campaign.campaign_name}."
         puts "\n#{ge.inspect}\n"
+        puts "\nSkipping...\n\n"
+        next
+      rescue TypeError => te
+        puts "\n\nType Error updating data for #{campaign.campaign_name}."
+        puts "\n#{te.inspect}"
+        puts"Report is probably empty.\n"
         puts "\nSkipping...\n\n"
         next
       rescue => e
