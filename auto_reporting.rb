@@ -49,8 +49,8 @@ class AutoReporting
       begin
         count += 1
         print "#{count} "
-         raw_report = get_report(campaign)
-         report_text = process_report(raw_report)
+        raw_report = get_report(campaign)
+        report_text = process_report(raw_report)
         update_spreadsheet(campaign, report_text)
         # Fixes Google Sheets API RateLimitError.
         sleep(15)
