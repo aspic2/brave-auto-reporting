@@ -39,7 +39,8 @@ class ReportData
 
   def process_data()
     convert_data_to_csv()
-    delete_columns(@unwanted_columns)
+    #2022-11-08 Removed delete_columns()
+    #delete_columns(@unwanted_columns)
     csv_string = @csv.to_csv()
     return get_report_text_as_UTF_8(csv_string)
   end
